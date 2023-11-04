@@ -4,6 +4,10 @@ module.exports = {
 		'./src/**/*.{html,ts}',
 	],
 	theme: {
+		fontFamily: {
+			sans: ['Inter', 'sans-serif'],
+			serif: ['Oswald', 'serif'],
+		},
 		extend: {},
 	},
 	plugins: [],
