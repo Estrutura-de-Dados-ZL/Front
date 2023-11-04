@@ -1,0 +1,10 @@
+<app-navbar (pesquisaEnviada)="receberPesquisa($event)" [isLoadingSearch]="isLoadingSearch"></app-navbar>
+<section class="max-w-screen-xl mx-auto p-4 flex">
+  <app-filter-search (filtroEnviado)="receberFiltro($event)"></app-filter-search>
+  <div>
+    <app-product-card [product]="product"></app-product-card>
+    <app-product-card [product]="product"></app-product-card>
+    <app-product-card [product]="product"></app-product-card>
+    <app-product-card [product]="product"></app-product-card>
+  </div>
+</section>

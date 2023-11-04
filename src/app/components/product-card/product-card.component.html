@@ -1,0 +1,23 @@
+<div class="flex p-4 bg-white rounded-md drop-shadow-md mb-2">
+  <!-- Foto do Produto (à esquerda) -->
+  <div class="w-2/5">
+      <img src="assets/images/image-not-found.png" alt="Produto" class="w-full h-auto">
+  </div>
+
+  <!-- Informações do Produto (à direita) -->
+  <div class="w-3/5 px-4">
+    <div class="h-3/4">
+      <!-- Nome do Produto -->
+      <h2 class="text-xl font-bold mb-2">{{ product.name }}</h2>
+
+      <!-- Descrição do Produto -->
+      <p class="text-gray-700">{{ product.description }}</p>
+    </div>
+
+    <!-- Quantidade -->
+    <div class="h-1/4 flex items-end">
+      <span>Quantidade: </span>
+      <p class="text-gray-700">{{ product.ammount }}</p>
+    </div>
+  </div>
+</div>
