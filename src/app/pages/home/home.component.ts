@@ -1,22 +1,30 @@
-import {Component} from '@angular/core';
-import {type Product} from 'src/types/product.interface';
+import {Component, Inject, type OnInit} from '@angular/core';
+import {ProdutoService} from 'src/app/services/produto.service';
+import {type Produto} from 'src/types/produto.interface';
 
 @Component({
 	selector: 'app-home',
 	templateUrl: './home.component.html',
 	styleUrls: ['./home.component.css'],
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit {
 	isLoadingSearch = false;
 
-	product: Product = {
-		id: 1,
-		name: 'Smartphone',
-		price: 1000,
-		description: 'Apenas um smartphone',
-		ammount: 10,
-		photo: 'https://picsum.photos/200/300',
-	};
+	produtos: Produto[] = [];
+
+	constructor(@Inject(ProdutoService) private readonly produtoService: ProdutoService) {}
+
+	ngOnInit(): void {
+		this.carregarProdutos();
+	}
+
+	carregarProdutos(): void {
+		this.produtoService.getAll().subscribe(produtos => {
+			if (produtos.length > 0) {
+				this.produtos = produtos;
+			}
+		});
+	}
 
 	receberPesquisa(termo: string) {
 		this.isLoadingSearch = true;
