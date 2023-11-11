@@ -1,5 +1,5 @@
 import {Component, Input} from '@angular/core';
-import {type Product} from 'src/types/product.interface';
+import {type Produto} from 'src/types/produto.interface';
 
 @Component({
 	selector: 'app-product-card',
@@ -7,5 +7,11 @@ import {type Product} from 'src/types/product.interface';
 	styleUrls: ['./product-card.component.css'],
 })
 export class ProductCardComponent {
-	@Input() product!: Product;
+	@Input() produto!: Produto;
+
+	ngOnInit(): void {
+		if (!this.produto.imagem) {
+			this.produto.imagem = 'assets/images/image-not-found.png';
+		}
+	}
 }
