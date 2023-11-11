@@ -13,6 +13,7 @@ import {NavbarComponent} from './components/navbar/navbar.component';
 import {InputSearchComponent} from './components/input-search/input-search.component';
 import {FilterSearchComponent} from './components/filter-search/filter-search.component';
 import {ProductCardComponent} from './components/product-card/product-card.component';
+import {HttpClientModule} from '@angular/common/http';
 
 @NgModule({
 	declarations: [
@@ -26,6 +27,7 @@ import {ProductCardComponent} from './components/product-card/product-card.compo
 	imports: [
 		BrowserModule,
 		AppRoutingModule,
+		HttpClientModule,
 		MenubarModule,
 		FormsModule,
 		InputTextModule,
