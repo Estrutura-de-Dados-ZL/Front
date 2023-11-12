@@ -1,17 +1,17 @@
 <section class="mr-10 bg-white rounded-md drop-shadow-md">
   <h3 class="text-lg font-bold p-4">Filtrar por tipo de produto</h3>
   <ul class="text-md p-4">
-    <li *ngFor="let tipoProduto of tiposProdutos" class="flex align-items-center mb-2">
+    <li *ngFor="let tipoProduto of tipoProdutos" class="flex align-items-center mb-2">
       <input
         type="radio"
         p-InputRadio
-        id="{{ tipoProduto.nome }}"
+        id="{{ tipoProduto.descricao }}"
         name="tipoProduto"
         [value]="tipoProduto"
         [(ngModel)]="filtroSelecionado"
         (ngModelChange)="enviarFiltro()"
       />
-      <label [for]="tipoProduto.nome" class="ml-2 whitespace-nowrap cursor-pointer">{{ tipoProduto.nome }}</label>
+      <label [for]="tipoProduto.descricao" class="ml-2 whitespace-nowrap cursor-pointer">{{ tipoProduto.descricao }}</label>
     </li>
     <li class="flex align-items-center">
       <input
@@ -23,7 +23,7 @@
         [(ngModel)]="filtroSelecionado"
         (ngModelChange)="enviarFiltro()"
       />
-      <label for="semFiltro" class="ml-2 cursor-pointer">{{ tipoSemFiltro.nome }}</label>
+      <label for="semFiltro" class="ml-2 cursor-pointer">{{ tipoSemFiltro.descricao }}</label>
     </li>
   </ul>
 </section>
