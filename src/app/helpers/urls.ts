@@ -3,6 +3,7 @@ import {environment} from 'src/environments/environment';
 export const produtoUrl = {
 	getAll: () => `${environment.link}/produto`,
 	getById: (id: number) => `${environment.link}/produto/${id}`,
+	getByNomeTipo: (id: number, nome: string) => `${environment.link}/produto/${id}/${nome}`
 };
 
 export const tipoProdutoUrl = {
