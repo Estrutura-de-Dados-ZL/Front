@@ -2,10 +2,12 @@
 <section class="max-w-screen-xl mx-auto p-4 flex">
   <app-filter-search (filtroEnviado)="receberFiltro($event)"></app-filter-search>
   <div class="grid grid-cols-1 w-full">
-    <button (click)="teste()">CHECKOUT</button>
+    <div>
+      <button (click)="teste()">CHECKOUT</button>
+    </div>
+    <div><button (click)="remover()">Delete</button></div>
     <div *ngFor="let produto of produtos">
       <div><button (click)="adicionar(produto)">Add</button></div>
-      <div><button (click)="remover()">Delete</button></div>
       <app-product-card  [produto]="produto"></app-product-card>
     </div>
     
