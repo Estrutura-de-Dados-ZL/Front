@@ -14,8 +14,8 @@ export class ProdutoService {
 	getAll(): Observable<Produto[]> {
 		return this.http.get<Produto[]>(produtoUrl.getAll());
 	}
-	
-	getByNomeTipo(id: number, nome: string):  Observable<Produto[]> {
+
+	getByNomeTipo(id: number, nome: string): Observable<Produto[]> {
 		return this.http.get<Produto[]>(produtoUrl.getByNomeTipo(id, nome));
 	}
 }
