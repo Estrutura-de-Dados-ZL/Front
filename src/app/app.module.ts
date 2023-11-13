@@ -14,6 +14,7 @@ import {InputSearchComponent} from './components/input-search/input-search.compo
 import {FilterSearchComponent} from './components/filter-search/filter-search.component';
 import {ProductCardComponent} from './components/product-card/product-card.component';
 import {HttpClientModule} from '@angular/common/http';
+import { CarrinhoComponent } from './pages/carrinho/carrinho.component';
 
 @NgModule({
 	declarations: [
@@ -23,6 +24,7 @@ import {HttpClientModule} from '@angular/common/http';
 		InputSearchComponent,
 		FilterSearchComponent,
 		ProductCardComponent,
+  CarrinhoComponent,
 	],
 	imports: [
 		BrowserModule,

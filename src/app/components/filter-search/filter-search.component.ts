@@ -1,33 +1,34 @@
-import {Component, EventEmitter, Output} from '@angular/core';
+import {Component, EventEmitter, Inject, type OnInit, Output} from '@angular/core';
+import {TipoProdutoService} from 'src/app/services/tipo-produto.service';
+import {type TipoProduto} from 'src/types/tipoProduto.interface';
 
 @Component({
 	selector: 'app-filter-search',
 	templateUrl: './filter-search.component.html',
 	styleUrls: ['./filter-search.component.css'],
 })
-export class FilterSearchComponent {
-	@Output() filtroEnviado = new EventEmitter<{nome: string; valor: string}>();
-	tipoSemFiltro = {nome: 'Sem filtro', valor: ''};
+export class FilterSearchComponent implements OnInit {
+	@Output() filtroEnviado = new EventEmitter<TipoProduto>();
+	tipoSemFiltro = {descricao: 'Sem filtro', id: 0};
 
-	tiposProdutos = [
-		{nome: 'Bens de conveniência', valor: ''},
-		{nome: 'Bens de impulso', valor: ''},
-		{nome: 'Bens de emergência', valor: ''},
-		{nome: 'Bens de compra comparada', valor: ''},
-		{nome: 'Bens de especialidade', valor: ''},
-		{nome: 'Bens perecíveis', valor: ''},
-		{nome: 'Bens duráveis', valor: ''},
-		{nome: 'Bens não duráveis', valor: ''},
-		{nome: 'Bens de capital', valor: ''},
-		{nome: 'Partes e materiais', valor: ''},
-		{nome: 'Abastecimento e serviços', valor: ''},
-		{nome: 'Commodities', valor: ''},
-		{nome: 'Produtos intermediários', valor: ''},
-	];
+	filtroSelecionado!: TipoProduto;
+	tipoProdutos: TipoProduto [] = [];
 
-	filtroSelecionado!: {nome: string; valor: string};
+	constructor(@Inject(TipoProdutoService) private readonly tipoProdutoService: TipoProdutoService) {}
+
+	ngOnInit(): void {
+		this.carregarTipoProdutos();
+	}
 
 	enviarFiltro() {
 		this.filtroEnviado.emit(this.filtroSelecionado);
+	}
+
+	carregarTipoProdutos(): void {
+		this.tipoProdutoService.getAll().subscribe(tipoProdutos => {
+			if (tipoProdutos.length > 0) {
+				this.tipoProdutos = tipoProdutos;
+			}
+		});
 	}
 }
