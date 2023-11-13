@@ -1,8 +1,10 @@
 import {Component, Inject, type OnInit} from '@angular/core';
+import {CheckoutService} from 'src/app/services/checkout.service';
 import {ProdutoService} from 'src/app/services/produto.service';
-import { TipoProdutoService } from 'src/app/services/tipo-produto.service';
+import {TipoProdutoService} from 'src/app/services/tipo-produto.service';
+import {Carrinho} from 'src/types/carrinho.interface';
 import {type Produto} from 'src/types/produto.interface';
-import { TipoProduto } from 'src/types/tipoProduto.interface';
+import {type TipoProduto} from 'src/types/tipoProduto.interface';
 
 @Component({
 	selector: 'app-home',
@@ -10,16 +12,28 @@ import { TipoProduto } from 'src/types/tipoProduto.interface';
 	styleUrls: ['./home.component.css'],
 })
 export class HomeComponent implements OnInit {
+	carrinho: Carrinho = new Carrinho();
 	isLoadingSearch = false;
-
 	produtos: Produto[] = [];
-	termoPesquisa: string = 'colevati'
-	tipoProdutoId: number = 0
+	termoPesquisa = 'colevati';
+	tipoProdutoId = 0;
 
-	constructor(@Inject(ProdutoService) private readonly produtoService: ProdutoService) {}
-	
+	constructor(@Inject(ProdutoService) private readonly produtoService: ProdutoService,
+		@Inject(CheckoutService) private readonly checkoutService: CheckoutService) {}
+
 	ngOnInit(): void {
 		this.carregarProdutos();
+	}
+
+	adicionar(produto: Produto) {
+		this.carrinho.pilha.push(produto);
+	}
+
+	remover() {
+		if (!this.carrinho.pilha.isEmpty()) {
+			this.carrinho.pilha.pop();
+			console.log(this.carrinho);
+		}
 	}
 
 	carregarProdutos(): void {
@@ -29,15 +43,23 @@ export class HomeComponent implements OnInit {
 			}
 		});
 	}
-	
-	
+
+	teste(): void {
+		console.log(this.carrinho);
+
+		this.checkoutService.checkout(this.carrinho.pilha).subscribe(p => {
+			console.log(p);
+		});
+	}
+
 	receberPesquisa(termoPesquisa: string) {
 		this.isLoadingSearch = true;
-		if (termoPesquisa === ''){
-			this.termoPesquisa = 'colevati'
+		if (termoPesquisa === '') {
+			this.termoPesquisa = 'colevati';
 		} else {
 			this.termoPesquisa = termoPesquisa;
 		}
+
 		this.filtrarProdutos();
 	}
 
@@ -47,15 +69,14 @@ export class HomeComponent implements OnInit {
 	}
 
 	filtrarProdutos() {
-		if (this.tipoProdutoId === 0 && this.termoPesquisa === 'colevati'){
-			this.carregarProdutos()
+		if (this.tipoProdutoId === 0 && this.termoPesquisa === 'colevati') {
+			this.carregarProdutos();
 			this.isLoadingSearch = false;
-		} else{
+		} else {
 			this.produtoService.getByNomeTipo(this.tipoProdutoId, this.termoPesquisa).subscribe(produtos => {
 				this.produtos = produtos;
 				this.isLoadingSearch = false;
-			})
+			});
 		}
-		
 	}
 }

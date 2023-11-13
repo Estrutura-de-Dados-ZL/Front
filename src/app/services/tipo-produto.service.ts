@@ -3,7 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import {type Observable} from 'rxjs';
 
 import {tipoProdutoUrl} from '../helpers/urls';
-import { TipoProduto } from 'src/types/tipoProduto.interface';
+import {type TipoProduto} from 'src/types/tipoProduto.interface';
 
 @Injectable({
 	providedIn: 'root',

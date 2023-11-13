@@ -1,13 +1,13 @@
-import {Component, EventEmitter, Inject, OnInit, Output} from '@angular/core';
-import { TipoProdutoService } from 'src/app/services/tipo-produto.service';
-import { TipoProduto } from 'src/types/tipoProduto.interface';
+import {Component, EventEmitter, Inject, type OnInit, Output} from '@angular/core';
+import {TipoProdutoService} from 'src/app/services/tipo-produto.service';
+import {type TipoProduto} from 'src/types/tipoProduto.interface';
 
 @Component({
 	selector: 'app-filter-search',
 	templateUrl: './filter-search.component.html',
 	styleUrls: ['./filter-search.component.css'],
 })
-export class FilterSearchComponent implements OnInit{
+export class FilterSearchComponent implements OnInit {
 	@Output() filtroEnviado = new EventEmitter<TipoProduto>();
 	tipoSemFiltro = {descricao: 'Sem filtro', id: 0};
 
@@ -17,7 +17,7 @@ export class FilterSearchComponent implements OnInit{
 	constructor(@Inject(TipoProdutoService) private readonly tipoProdutoService: TipoProdutoService) {}
 
 	ngOnInit(): void {
-		this.carregarTipoProdutos()
+		this.carregarTipoProdutos();
 	}
 
 	enviarFiltro() {
@@ -31,5 +31,4 @@ export class FilterSearchComponent implements OnInit{
 			}
 		});
 	}
-
 }
