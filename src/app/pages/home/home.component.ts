@@ -3,6 +3,7 @@ import {CheckoutService} from 'src/app/services/checkout.service';
 import {ProdutoService} from 'src/app/services/produto.service';
 import {TipoProdutoService} from 'src/app/services/tipo-produto.service';
 import {Carrinho} from 'src/types/carrinho.interface';
+import { Cliente } from 'src/types/cliente.interface';
 import {type Produto} from 'src/types/produto.interface';
 import {type TipoProduto} from 'src/types/tipoProduto.interface';
 
@@ -47,7 +48,20 @@ export class HomeComponent implements OnInit {
 	teste(): void {
 		console.log(this.carrinho);
 
-		this.checkoutService.checkout(this.carrinho.pilha).subscribe(p => {
+		const cliente: Cliente = {
+			id: 1,
+			nome: 'string',
+			cpf: 'string',
+			tipoPessoa: 'string',
+			telefone: 'string',
+			email: 'string',
+			rua: 'string',
+			numero: 1,
+			cep: 'string',
+			complemento: 'string',
+		}
+
+		this.checkoutService.checkout(this.carrinho.pilha, cliente).subscribe(p => {
 			console.log(p);
 		});
 	}

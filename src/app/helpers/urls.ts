@@ -17,5 +17,5 @@ export const clienteUrl = {
 };
 
 export const checkoutUrl = {
-	checkout: (): string => `${environment.link}/carrinho`,
+	checkout: (): string => `${environment.link}/checkout`,
 };
