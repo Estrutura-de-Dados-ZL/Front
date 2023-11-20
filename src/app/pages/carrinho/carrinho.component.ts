@@ -33,7 +33,7 @@ export class CarrinhoComponent implements OnInit {
 
 	checkout(): void {
 		this.carrinhoService.carrinho$.subscribe(carrinho => {
-			this.checkoutService.checkout(carrinho.pilha).subscribe(p => {
+			this.checkoutService.checkout(carrinho.pilha, 2).subscribe(p => {
 				console.log(p);
 				this.voltar();
 			});
