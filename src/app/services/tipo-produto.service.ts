@@ -14,4 +14,12 @@ export class TipoProdutoService {
 	getAll(): Observable<TipoProduto[]> {
 		return this.http.get<TipoProduto[]>(tipoProdutoUrl.getAll());
 	}
+	
+	delete(id: number): Observable<void> {
+		return this.http.delete<void>(tipoProdutoUrl.getById(id));
+	}
+	
+	update(tipoProduto: TipoProduto): Observable<TipoProduto> {
+		return this.http.put<TipoProduto>(tipoProdutoUrl.update(tipoProduto.id), {tipoProduto});
+	}
 }
