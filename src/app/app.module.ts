@@ -24,6 +24,7 @@ import {TabelaComponent} from './components/table/tabela/tabela.component';
 import {ProdutosComponent} from './pages/produtos/produtos.component';
 import {TipoProdutosComponent} from './pages/tipo-produtos/tipo-produtos.component';
 import {CommonModule} from '@angular/common';
+import { ClienteComponent } from './pages/cliente/cliente.component';
 
 @NgModule({
 	declarations: [
@@ -37,6 +38,7 @@ import {CommonModule} from '@angular/common';
 		TabelaComponent,
 		ProdutosComponent,
 		TipoProdutosComponent,
+  ClienteComponent,
 	],
 	imports: [
 		FormsModule,
