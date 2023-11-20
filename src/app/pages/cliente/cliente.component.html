@@ -1,1 +1,153 @@
-<p>cliente works!</p>
+<section class="max-w-screen-xl mx-auto p-4">
+    <app-tabela [colunas]="colunas" [data]="clientes"  (dataEdit)="abrirModalEditar($event)" (dataDelete)="abrirModalDeletar($event)" ></app-tabela>
+  </section>
+
+<!-- Modal Edição -->
+<p-dialog *ngIf="clienteSelecionado" header="Editar Produto" [(visible)]="showModalEditar" [modal]="true" [style]="{ width: '50vw' }" [draggable]="false" [resizable]="false">
+    <div>
+      <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+        <div class="mb-6">
+          <label class="block text-gray-700 text-sm font-bold mb-2" for="nome">
+            Nome:
+          </label>
+          <input
+            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            id="nome"
+            type="text"
+            placeholder="Nome"
+            [(ngModel)]="clienteSelecionado.nome"
+            name="nome"
+          />
+        </div>
+        <div class="mb-6">
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="cpf">
+                CPF:
+            </label>
+            <input
+                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                id="cpf"
+                type="text"
+                placeholder="CPF"
+                [(ngModel)]="clienteSelecionado.cpf"
+                name="cpf"
+            />
+        </div>
+        <div class="mb-6">
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="cnpj">
+              CNPJ:
+            </label>
+            <input
+              class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              id="cnpj"
+              type="text"
+              placeholder="CNPJ"
+              [(ngModel)]="clienteSelecionado.cnpj"
+              name="cnpj"
+            />
+          </div>
+        <div class="mb-6">
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="telefone">
+              Telefone:
+            </label>
+            <input
+              class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              id="telefone"
+              type="text"
+              placeholder="telefone"
+              [(ngModel)]="clienteSelecionado.telefone"
+              name="telefone"
+            />
+        </div>
+        <div class="mb-6">
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="email">
+              E-mail:
+            </label>
+            <input
+              class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              id="email"
+              type="text"
+              placeholder="email"
+              [(ngModel)]="clienteSelecionado.email"
+              name="email"
+            />
+        </div>
+        <div class="mb-6">
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="rua">
+              Rua:
+            </label>
+            <input
+              class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              id="rua"
+              type="text"
+              placeholder="rua"
+              [(ngModel)]="clienteSelecionado.rua"
+              name="rua"
+            />
+        </div>
+        <div class="mb-6">
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="numero">
+              Número:
+            </label>
+            <input
+              class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              id="numero"
+              type="text"
+              placeholder="numero"
+              [(ngModel)]="clienteSelecionado.numero"
+              name="numero"
+            />
+        </div>
+        <div class="mb-6">
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="cep">
+              CEP:
+            </label>
+            <input
+              class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              id="cep"
+              type="text"
+              placeholder="cep"
+              [(ngModel)]="clienteSelecionado.cep"
+              name="cep"
+            />
+        </div>
+        <div class="mb-6">
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="complemento">
+              Complemento:
+            </label>
+            <input
+              class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              id="complemento"
+              type="text"
+              placeholder="complemento"
+              [(ngModel)]="clienteSelecionado.complemento"
+              name="complemento"
+            />
+        </div>
+        <div class="flex items-end justify-end">
+          <button
+            class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline "
+            type="button"
+            (click)="editarCliente()"
+          >
+            Editar
+          </button>
+        </div>
+      </form>
+    </div>
+  </p-dialog>
+
+  <!-- Modal Deletar -->
+<p-dialog *ngIf="clienteSelecionado" header="Deletar Produto" [(visible)]="showModalDeletar" [modal]="true" [style]="{ width: '50vw' }" [draggable]="false" [resizable]="false">
+    <div>
+      <p>Tem certeza que deseja deletar o tipo produto {{ clienteSelecionado.nome }}?</p>
+      <div class="flex items-end justify-end">
+        <button
+          class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline "
+          type="button"
+          (click)="deletarCliente()"
+        >
+          Deletar
+        </button>
+      </div>
+    </div>
+  </p-dialog>

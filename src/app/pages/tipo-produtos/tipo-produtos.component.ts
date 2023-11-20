@@ -13,10 +13,12 @@ export class TipoProdutosComponent {
 		'descricao',
 	];
 
+	showModalEditar = false;
+	showModalDeletar = false;
+	showModalAdicionar = false;
 	tipoProdutos: TipoProduto [] = [];
 	tipoProdutoSelecionado!: TipoProduto;
-	showModalDeletar = false;
-	showModalEditar = false;
+	
 
 	constructor(@Inject(TipoProdutoService) private readonly tipoProdutoService: TipoProdutoService) {}
 
@@ -34,6 +36,10 @@ export class TipoProdutosComponent {
 		this.showModalDeletar = true;
 	}
 
+	abrirModalAdicionar(): void{
+		this.showModalAdicionar = true
+	}
+
 	editarTipoProduto(): void {
 			this.tipoProdutoService.update(this.tipoProdutoSelecionado).subscribe(() => {
 				this.carregarTipoProdutos();
@@ -41,18 +47,18 @@ export class TipoProdutosComponent {
 			});
 	}
 
-	carregarTipoProdutos(): void {
+	deletarTipoProduto(): void {
+		this.tipoProdutoService.delete(this.tipoProdutoSelecionado.id).subscribe(() => {
+			this.carregarTipoProdutos();
+			this.showModalDeletar = false;
+		});
+	}
+	
+	private carregarTipoProdutos(): void {
 		this.tipoProdutoService.getAll().subscribe(tipoProdutos => {
 			if (tipoProdutos.length > 0) {
 				this.tipoProdutos = tipoProdutos;
 			}
-		});
-	}
-
-	deletartipoProduto(): void {
-		this.tipoProdutoService.delete(this.tipoProdutoSelecionado.id).subscribe(() => {
-			this.carregarTipoProdutos();
-			this.showModalDeletar = false;
 		});
 	}
 }
