@@ -1,5 +1,4 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {Subject, debounceTime} from 'rxjs';
 
 @Component({
 	selector: 'app-navbar',
@@ -9,6 +8,8 @@ import {Subject, debounceTime} from 'rxjs';
 export class NavbarComponent {
 	@Output() pesquisaEnviada = new EventEmitter<string>();
 	@Input() isLoadingSearch = false;
+	@Input() isCarrinho = false;
+	@Input() totalProdutosNoCarrinho!: string;
 
 	toggleMenu(): void {
 		const menu = document.querySelector('.menu');
