@@ -11,6 +11,7 @@ export const produtoUrl = {
 export const tipoProdutoUrl = {
 	getAll: (): string => `${environment.link}/tipoProduto`,
 	getById: (id: number): string => `${environment.link}/tipoProduto/${id}`,
+	update: (id: number): string => `${environment.link}/tipoProduto/${id}`,
 };
 
 export const clienteUrl = {
