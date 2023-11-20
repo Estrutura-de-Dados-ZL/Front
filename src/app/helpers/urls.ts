@@ -18,5 +18,5 @@ export const clienteUrl = {
 };
 
 export const checkoutUrl = {
-	checkout: (): string => `${environment.link}/carrinho`,
+	checkout: (idClient: number): string => `${environment.link}/checkout/${idClient}`,
 };
