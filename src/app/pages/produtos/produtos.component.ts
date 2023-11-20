@@ -1,5 +1,5 @@
 import {Component, Inject} from '@angular/core';
-import {FormControl} from '@angular/forms';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {ProdutoService} from 'src/app/services/produto.service';
 import {TipoProdutoService} from 'src/app/services/tipo-produto.service';
 import {type Produto} from 'src/types/produto.interface';
@@ -20,10 +20,19 @@ export class ProdutosComponent {
 
 	showModalEditar = false;
 	showModalDeletar = false;
+	showModalAdicionar = false;
 	produtoSelecionado!: Produto;
 	produtos: Produto[] = [];
 	tipoProdutos: TipoProduto[] = [];
 	tipoProdutoSelecionado = new FormControl<TipoProduto | undefined>(undefined);
+	produtoAdicionar = new FormGroup({
+		nome: new FormControl('', {validators: [Validators.required]}),
+		valor: new FormControl('', {validators: [Validators.required]}),
+		quantidade: new FormControl('', {validators: [Validators.required]}),
+		descricao: new FormControl('', {validators: [Validators.required]}),
+		imagem: new FormControl('', {validators: [Validators.required]}),
+		tipoProduto: new FormControl('', {validators: [Validators.required]}),
+	});
 
 	constructor(
 		@Inject(ProdutoService) private readonly produtoService: ProdutoService,
@@ -45,6 +54,10 @@ export class ProdutosComponent {
 	abrirModalDeletar(produto: Produto): void {
 		this.produtoSelecionado = produto;
 		this.showModalDeletar = true;
+	}
+
+	abrirModalAdicionar(): void {
+		this.showModalAdicionar = true;
 	}
 
 	editarProduto(): void {

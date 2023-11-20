@@ -5,6 +5,7 @@ export const produtoUrl = {
 	getById: (id: number): string => `${environment.link}/produto/${id}`,
 	getByNomeTipo: (id: number, nome: string): string => `${environment.link}/produto/${id}/${nome}`,
 	update: (id: number): string => `${environment.link}/produto/${id}`,
+	create: (): string => `${environment.link}/produto`,
 };
 
 export const tipoProdutoUrl = {

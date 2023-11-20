@@ -10,6 +10,7 @@ export class TabelaComponent {
 	@Input() data: any[] = [];
 	@Output() dataEdit = new EventEmitter<any>();
 	@Output() dataDelete = new EventEmitter<any>();
+	@Output() dataAdd = new EventEmitter<boolean>();
 
 	editar(data: any) {
 		this.dataEdit.emit(data);
@@ -17,5 +18,9 @@ export class TabelaComponent {
 
 	deletar(data: any) {
 		this.dataDelete.emit(data);
+	}
+
+	adicionar() {
+		this.dataAdd.emit(true);
 	}
 }
