@@ -4,6 +4,7 @@ export const produtoUrl = {
 	getAll: (): string => `${environment.link}/produto`,
 	getById: (id: number): string => `${environment.link}/produto/${id}`,
 	getByNomeTipo: (id: number, nome: string): string => `${environment.link}/produto/${id}/${nome}`,
+	update: (id: number): string => `${environment.link}/produto/${id}`,
 };
 
 export const tipoProdutoUrl = {

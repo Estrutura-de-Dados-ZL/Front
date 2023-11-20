@@ -1,29 +1,33 @@
 <div class="flex p-4 bg-white rounded-md drop-shadow-md mb-2">
   <!-- Foto do Produto (à esquerda) -->
-  <div class="w-1/5">
+  <div class="w-2/5">
     <img [src]="produto.imagem" [alt]="produto.nome" class="object-cover h-48">
   </div>
 
   <!-- Informações do Produto (à direita) -->
-  <div class="w-4/5 pl-4">
+  <div class="w-3/5 pl-4">
     <div class="h-3/4">
       <!-- Nome do Produto -->
       <h2 class="text-xl font-bold mb-2">{{ produto.nome }}</h2>
 
       <!-- Descrição do Produto -->
-      <p class="text-gray-700">{{ produto.descricao }}</p>
+      <p class="text-gray-700 mb-4">{{ produto.descricao }}</p>
+
+      <!-- Quantidade -->
+      <p>Quantidade: 
+        <span class="text-gray-700">{{ produto.quantidade }}</span>
+      </p>
     </div>
 
-    <!-- Quantidade -->
-    <div class="h-1/4 flex items-end">
-      <div class="mr-4">
-        <p>Quantidade: 
-          <span class="text-gray-700">{{ produto.quantidade }}</span>
-        </p>
-      </div>
+    <!-- Botao Add Carrinho -->
+    <div class="h-1/4 flex items-end" *ngIf="!isCarrinho">
       <div>
-        <button type="button">
-          <i class="pi pi-shopping-cart text-xl"></i>
+        <button
+          class="bg-gray-200 hover:bg-gray-300 rounded-md px-4 py-2 mr-2"
+          (click)="adicionar(produto)"  
+        >
+          Adicionar ao carrinho
+          <i class="pi pi-shopping-cart cursor-pointer text-l"></i>
         </button>
       </div>
     </div>

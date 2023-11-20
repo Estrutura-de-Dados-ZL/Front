@@ -12,28 +12,16 @@ import {type TipoProduto} from 'src/types/tipoProduto.interface';
 	styleUrls: ['./home.component.css'],
 })
 export class HomeComponent implements OnInit {
-	carrinho: Carrinho = new Carrinho();
 	isLoadingSearch = false;
 	produtos: Produto[] = [];
 	termoPesquisa = 'colevati';
 	tipoProdutoId = 0;
+	totalProdutosNoCarrinho = '0';
 
-	constructor(@Inject(ProdutoService) private readonly produtoService: ProdutoService,
-		@Inject(CheckoutService) private readonly checkoutService: CheckoutService) {}
+	constructor(@Inject(ProdutoService) private readonly produtoService: ProdutoService) {}
 
 	ngOnInit(): void {
 		this.carregarProdutos();
-	}
-
-	adicionar(produto: Produto) {
-		this.carrinho.pilha.push(produto);
-	}
-
-	remover() {
-		if (!this.carrinho.pilha.isEmpty()) {
-			this.carrinho.pilha.pop();
-			console.log(this.carrinho);
-		}
 	}
 
 	carregarProdutos(): void {
@@ -41,14 +29,6 @@ export class HomeComponent implements OnInit {
 			if (produtos.length > 0) {
 				this.produtos = produtos;
 			}
-		});
-	}
-
-	teste(): void {
-		console.log(this.carrinho);
-
-		this.checkoutService.checkout(this.carrinho.pilha).subscribe(p => {
-			console.log(p);
 		});
 	}
 
@@ -78,5 +58,9 @@ export class HomeComponent implements OnInit {
 				this.isLoadingSearch = false;
 			});
 		}
+	}
+
+	recebeTotalProdutos(totalProdutos: string) {
+		this.totalProdutosNoCarrinho = totalProdutos;
 	}
 }
