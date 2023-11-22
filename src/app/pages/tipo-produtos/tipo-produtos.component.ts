@@ -2,6 +2,11 @@ import {Component, Inject} from '@angular/core';
 import {TipoProdutoService} from 'src/app/services/tipo-produto.service';
 import {type TipoProduto} from 'src/types/tipoProduto.interface';
 
+const TIPO_PRODUTO_CADASTRO = {
+	id: 0,
+	descricao: '',
+};
+
 @Component({
 	selector: 'app-tipo-produtos',
 	templateUrl: './tipo-produtos.component.html',
@@ -13,7 +18,7 @@ export class TipoProdutosComponent {
 		'descricao',
 	];
 
-	tipoProdutoCadastro!: TipoProduto;
+	tipoProdutoCadastro = TIPO_PRODUTO_CADASTRO;
 	tipoProdutoSelecionado!: TipoProduto;
 	tipoProdutos: TipoProduto [] = [];
 	showModalEditar = false;
@@ -33,10 +38,7 @@ export class TipoProdutosComponent {
 		this.showModalEditar = true;
 	}
 
-	abrirModalCadastrar(tipoProduto: TipoProduto): void {
-		console.log(tipoProduto);
-		
-		this.tipoProdutoCadastro = tipoProduto;
+	abrirModalCadastrar(abrir: boolean): void {
 		this.showModalCadastrar = true;
 	}
 
@@ -45,16 +47,19 @@ export class TipoProdutosComponent {
 		this.showModalDeletar = true;
 	}
 
-	cadastrarTipoProduto(tipoProduto: TipoProduto): void {
-		this.tipoProdutoService.create(tipoProduto).subscribe(() => {
+	cadastrarTipoProduto(): void {		
+		this.tipoProdutoService.create(this.tipoProdutoCadastro).subscribe(() => {
 			this.carregarTipoProdutos();
 		});
+		this.tipoProdutoCadastro = TIPO_PRODUTO_CADASTRO;
+		this.showModalCadastrar = false;
 	}
 
 	editaTipoProduto(tipoProduto: TipoProduto): void {
 		this.tipoProdutoService.update(tipoProduto).subscribe(() => {
 			this.carregarTipoProdutos();
 		});
+		this.showModalEditar = false;
 	}
 
 	deletarTipoProduto(tipoProduto: TipoProduto): void {
