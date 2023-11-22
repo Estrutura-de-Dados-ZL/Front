@@ -1,5 +1,5 @@
 import {Component, Inject} from '@angular/core';
-import {FormControl} from '@angular/forms';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {ProdutoService} from 'src/app/services/produto.service';
 import {TipoProdutoService} from 'src/app/services/tipo-produto.service';
 import {type Produto} from 'src/types/produto.interface';

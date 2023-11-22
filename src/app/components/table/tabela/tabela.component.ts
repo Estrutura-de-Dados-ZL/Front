@@ -12,15 +12,15 @@ export class TabelaComponent {
 	@Output() dataEdit = new EventEmitter<any>();
 	@Output() dataDelete = new EventEmitter<any>();
 
-	adicionar() {
-		this.dataAdd.emit(true);
-	}
-
 	editar(data: any) {
 		this.dataEdit.emit(data);
 	}
 
 	deletar(data: any) {
 		this.dataDelete.emit(data);
+	}
+
+	adicionar() {
+		this.dataAdd.emit(true);
 	}
 }

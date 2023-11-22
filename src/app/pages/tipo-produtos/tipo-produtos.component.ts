@@ -78,4 +78,11 @@ export class TipoProdutosComponent {
 			}
 		});
 	}
+
+	deletartipoProduto(): void {
+		this.tipoProdutoService.delete(this.tipoProdutoSelecionado.id).subscribe(() => {
+			this.carregarTipoProdutos();
+			this.showModalDeletar = false;
+		});
+	}
 }
