@@ -2,6 +2,7 @@ import {Component, Inject} from '@angular/core';
 import {TipoProdutoService} from 'src/app/services/tipo-produto.service';
 import {type TipoProduto} from 'src/types/tipoProduto.interface';
 
+// eslint-disable-next-line @typescript-eslint/naming-convention
 const TIPO_PRODUTO_CADASTRO = {
 	id: 0,
 	descricao: '',
@@ -18,7 +19,7 @@ export class TipoProdutosComponent {
 		'descricao',
 	];
 
-	tipoProdutoCadastro = TIPO_PRODUTO_CADASTRO;
+	tipoProdutoCadastro: TipoProduto = TIPO_PRODUTO_CADASTRO;
 	tipoProdutoSelecionado!: TipoProduto;
 	tipoProdutos: TipoProduto [] = [];
 	showModalEditar = false;
@@ -47,7 +48,11 @@ export class TipoProdutosComponent {
 		this.showModalDeletar = true;
 	}
 
-	cadastrarTipoProduto(): void {		
+	cadastrarTipoProduto(): void {
+		if (this.tipoProdutoCadastro.descricao === '') {
+			return;
+		}
+
 		this.tipoProdutoService.create(this.tipoProdutoCadastro).subscribe(() => {
 			this.carregarTipoProdutos();
 		});
@@ -68,15 +73,7 @@ export class TipoProdutosComponent {
 		});
 	}
 
-	private setarValorInicialForm(): void {
-		this.tipoProdutoSelecionado = this.tipoProdutos.find(tipoProduto => tipoProduto.id === this.tipoProdutoSelecionado.id)!;
-	}
-	
-	private ordenaTiposProdutos(): void {
-		this.tipoProdutos.sort((a, b) => a.id - b.id);
-	}
-
-	carregarTipoProdutos(): void {
+	private carregarTipoProdutos(): void {
 		this.tipoProdutoService.getAll().subscribe(tipoProdutos => {
 			if (tipoProdutos.length > 0) {
 				this.tipoProdutos = tipoProdutos;
@@ -84,10 +81,18 @@ export class TipoProdutosComponent {
 		});
 	}
 
-	deletartipoProduto(): void {
+	private deletartipoProduto(): void {
 		this.tipoProdutoService.delete(this.tipoProdutoSelecionado.id).subscribe(() => {
 			this.carregarTipoProdutos();
 			this.showModalDeletar = false;
 		});
+	}
+
+	private setarValorInicialForm(): void {
+		this.tipoProdutoSelecionado = this.tipoProdutos.find(tipoProduto => tipoProduto.id === this.tipoProdutoSelecionado.id)!;
+	}
+
+	private ordenaTiposProdutos(): void {
+		this.tipoProdutos.sort((a, b) => a.id - b.id);
 	}
 }

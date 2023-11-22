@@ -22,7 +22,7 @@ export const clienteUrl = {
 	getAll: (): string => `${environment.link}/cliente`,
 	getById: (id: number): string => `${environment.link}/cliente/${id}`,
 	getByNome: (nome: string): string => `${environment.link}/cliente/${nome}`,
-	update : (id: number): string => `${environment.link}/cliente/${id}`,
+	update: (id: number): string => `${environment.link}/cliente/${id}`,
 	save: (): string => `${environment.link}/cliente`,
 	delete: (id: number): string => `${environment.link}/cliente/${id}`,
 };
