@@ -5,6 +5,17 @@ import {TipoProdutoService} from 'src/app/services/tipo-produto.service';
 import {type Produto} from 'src/types/produto.interface';
 import {type TipoProduto} from 'src/types/tipoProduto.interface';
 
+const PRODUTO_CADASTRO = {		id: 0,
+	nome: '',
+	descricao: '',
+	valor: 0,
+	quantidade: 0,
+	imagem: '',
+	tipoProduto: {
+		id: 0,
+		descricao: '',
+	},
+}
 @Component({
 	selector: 'app-produtos',
 	templateUrl: './produtos.component.html',
@@ -20,6 +31,8 @@ export class ProdutosComponent {
 
 	showModalEditar = false;
 	showModalDeletar = false;
+	showModalCadastrar = false;
+	produtoCadastro = PRODUTO_CADASTRO;
 	produtoSelecionado!: Produto;
 	produtos: Produto[] = [];
 	tipoProdutos: TipoProduto[] = [];
@@ -42,10 +55,32 @@ export class ProdutosComponent {
 		this.showModalEditar = true;
 	}
 
+	abrirModalCadastrar(abrir: boolean): void {
+		this.showModalCadastrar = true;
+	}
+
 	abrirModalDeletar(produto: Produto): void {
 		this.produtoSelecionado = produto;
 		this.showModalDeletar = true;
 	}
+
+	cadastrarProduto(produto: Produto): void {
+		if(this.produtoCadastro.nome || this.produtoCadastro.valor || this.produtoCadastro.quantidade || this.produtoCadastro.descricao){
+			this.produtoCadastro.nome = this.produtoCadastro.nome;
+			this.produtoCadastro.valor = this.produtoCadastro.valor;
+			this.produtoCadastro.quantidade = this.produtoCadastro.quantidade;
+		}
+		if(this.tipoProdutoSelecionado.value){
+			this.produtoCadastro.tipoProduto = this.tipoProdutoSelecionado.value;
+		}
+		
+		this.produtoService.create(this.produtoCadastro, this.produtoCadastro.tipoProduto.id).subscribe(() => {
+			this.carregarProdutos();
+		});
+		this.produtoCadastro = PRODUTO_CADASTRO;
+		this.showModalCadastrar = false;
+	}
+
 
 	editarProduto(): void {
 		if (this.tipoProdutoSelecionado.value) {

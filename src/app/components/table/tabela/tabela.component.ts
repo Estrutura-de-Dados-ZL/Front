@@ -8,8 +8,13 @@ import {Component, EventEmitter, Input, Output} from '@angular/core';
 export class TabelaComponent {
 	@Input() colunas: string[] = [];
 	@Input() data: any[] = [];
+	@Output() dataAdd = new EventEmitter<any>();
 	@Output() dataEdit = new EventEmitter<any>();
 	@Output() dataDelete = new EventEmitter<any>();
+
+	adicionar() {
+		this.dataAdd.emit(true);
+	}
 
 	editar(data: any) {
 		this.dataEdit.emit(data);

@@ -17,4 +17,12 @@ export class CheckoutService {
 		const pilhaString = JSON.stringify(pilhaProduto);
 		return this.http.post<Checkout>(checkoutUrl.checkout(idCliente), {pilha: pilhaString});
 	}
+
+	getAll(): Observable<Checkout[]> {
+		return this.http.get<Checkout[]>(checkoutUrl.getCheckout());
+	}
+
+	getById(id: number): Observable<Checkout> {
+		return this.http.get<Checkout>(checkoutUrl.getCheckoutById(id));
+	}
 }

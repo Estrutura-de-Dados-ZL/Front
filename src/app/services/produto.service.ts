@@ -23,6 +23,10 @@ export class ProdutoService {
 		return this.http.put<Produto>(produtoUrl.update(produto.id), {produto});
 	}
 
+	create(produto: Produto, tipoProdutoId: number): Observable<Produto> {
+		return this.http.post<Produto>(produtoUrl.save(tipoProdutoId), {produto});
+	}
+
 	delete(id: number): Observable<void> {
 		return this.http.delete<void>(produtoUrl.getById(id));
 	}
