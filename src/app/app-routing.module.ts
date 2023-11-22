@@ -4,12 +4,15 @@ import {HomeComponent} from './pages/home/home.component';
 import {CarrinhoComponent} from './pages/carrinho/carrinho.component';
 import {ProdutosComponent} from './pages/produtos/produtos.component';
 import {TipoProdutosComponent} from './pages/tipo-produtos/tipo-produtos.component';
+import {ClienteComponent} from './pages/cliente/cliente.component';
 
 const routes: Routes = [
 	{path: '', component: HomeComponent},
 	{path: 'carrinho', component: CarrinhoComponent},
 	{path: 'produtos', component: ProdutosComponent},
 	{path: 'tipoProdutos', component: TipoProdutosComponent},
+	{path: 'clientes', component: ClienteComponent},
+	{path: '**', redirectTo: ''},
 ];
 
 @NgModule({
