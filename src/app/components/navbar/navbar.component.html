@@ -5,14 +5,16 @@
       <div class="h-10 mr-2 pt-1 w-1/12 text-center">
         <span class="whitespace-nowrap text-3xl font-bold font-serif">E-COMMERCE</span>
       </div>
-      <div class="h-10 mr-2 pt-1 w-1/12" *ngIf="isCarrinho">
-        <span class="whitespace-nowrap text-2xl font-bold font-serif">CARRINHO</span>
+      <div class="h-10 mr-2 pt-1 w-1/12" *ngIf="notHomePage">
+        <span class="whitespace-nowrap text-2xl font-bold font-serif">{{ nomePagina }}</span>
       </div>
-      <app-input-search *ngIf="!isCarrinho" (pesquisaEnviada)="enviarPesquisa($event)" [isLoadingSearch]="isLoadingSearch"></app-input-search>
-      <div class="ml-4 flex justify-between w-1/12">
-        <i class="pi pi-home cursor-pointer text-xl" routerLink=""></i>
-        <i class="pi pi-user cursor-pointer text-xl"></i>
-        <i class="pi pi-shopping-cart cursor-pointer text-xl" routerLink="/carrinho" pBadge [value]="totalProdutosNoCarrinho" severity="warning"></i>
+      <app-input-search *ngIf="!notHomePage" (pesquisaEnviada)="enviarPesquisa($event)" [isLoadingSearch]="isLoadingSearch"></app-input-search>
+      <div class="ml-4 flex justify-between w-2/12">
+        <i class="pi pi-home cursor-pointer text-xl" routerLink="" title="Home"></i>
+        <i class="pi pi-user cursor-pointer text-xl" routerLink="/clientes" title="Clientes"></i>
+        <i class="pi pi-book cursor-pointer text-xl" routerLink="/produtos" title="Produtos"></i>
+        <i class="pi pi-th-large cursor-pointer text-xl" routerLink="/tipoProdutos" title="Tipo de Produtos"></i>
+        <i class="pi pi-shopping-cart cursor-pointer text-xl" routerLink="/carrinho" title="Carrinho" pBadge [value]="totalProdutosNoCarrinho" severity="warning"></i>
       </div>
     </div>
   </nav>
@@ -34,7 +36,7 @@
 <!-- Menu expansível para dispositivos móveis -->
 <div class="fixed inset-0 bg-gray-800 bg-opacity-75 flex justify-center items-center z-50 hidden menu">
   <div class="bg-white">
-    <app-input-search *ngIf="!isCarrinho" (pesquisaEnviada)="enviarPesquisa($event)" [isLoadingSearch]="isLoadingSearch"></app-input-search>
+    <app-input-search *ngIf="!notHomePage" (pesquisaEnviada)="enviarPesquisa($event)" [isLoadingSearch]="isLoadingSearch"></app-input-search>
     <div class="flex flex-col items-center">
       <i class="pi pi-home cursor-pointer text-xl" routerLink=""></i>
       <i class="pi pi-user cursor-pointer text-xl"></i>

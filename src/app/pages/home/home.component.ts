@@ -61,6 +61,7 @@ export class HomeComponent implements OnInit {
 	}
 
 	recebeTotalProdutos(totalProdutos: string) {
+		localStorage.setItem('totalProdutosCarrinho', totalProdutos);
 		this.totalProdutosNoCarrinho = totalProdutos;
 	}
 }

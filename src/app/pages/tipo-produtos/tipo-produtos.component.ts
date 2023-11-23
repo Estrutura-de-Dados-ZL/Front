@@ -25,11 +25,16 @@ export class TipoProdutosComponent {
 	showModalEditar = false;
 	showModalDeletar = false;
 	showModalCadastrar = false;
+	totalProdutosNoCarrinho = '0';
 
 	constructor(@Inject(TipoProdutoService) private readonly tipoProdutoService: TipoProdutoService) {}
 
 	ngOnInit(): void {
 		this.carregarTipoProdutos();
+		const totalProdutosNoCarrinho = localStorage.getItem('totalProdutosCarrinho');
+		if (totalProdutosNoCarrinho){
+			this.totalProdutosNoCarrinho = totalProdutosNoCarrinho;
+		}
 	}
 
 	abrirModalEditar(tipoProduto: TipoProduto): void {

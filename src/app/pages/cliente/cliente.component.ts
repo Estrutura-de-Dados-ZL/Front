@@ -33,11 +33,16 @@ export class ClienteComponent {
 	showModalEditar = false;
 	showModalDeletar = false;
 	showModalCadastrar = false;
+	totalProdutosNoCarrinho = '0';
 
 	constructor(@Inject(ClienteService) private readonly clienteService: ClienteService) {}
 
 	ngOnInit(): void {
 		this.carregarClientes();
+		const totalProdutosNoCarrinho = localStorage.getItem('totalProdutosCarrinho');
+		if (totalProdutosNoCarrinho){
+			this.totalProdutosNoCarrinho = totalProdutosNoCarrinho;
+		}
 	}
 
 	abrirModalEditar(cliente: Cliente): void {

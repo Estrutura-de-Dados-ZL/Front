@@ -38,6 +38,7 @@ export class ProdutosComponent {
 	produtos: Produto[] = [];
 	tipoProdutos: TipoProduto[] = [];
 	tipoProdutoSelecionado = new FormControl<TipoProduto | undefined>(undefined);
+	totalProdutosNoCarrinho = '0';
 
 	constructor(
 		@Inject(ProdutoService) private readonly produtoService: ProdutoService,
@@ -47,6 +48,10 @@ export class ProdutosComponent {
 	ngOnInit(): void {
 		this.carregarProdutos();
 		this.carregarTipoProdutos();
+		const totalProdutosNoCarrinho = localStorage.getItem('totalProdutosCarrinho');
+		if (totalProdutosNoCarrinho){
+			this.totalProdutosNoCarrinho = totalProdutosNoCarrinho;
+		}
 	}
 
 	abrirModalEditar(produto: Produto): void {
