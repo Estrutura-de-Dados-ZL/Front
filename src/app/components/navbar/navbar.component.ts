@@ -8,8 +8,9 @@ import {Component, EventEmitter, Input, Output} from '@angular/core';
 export class NavbarComponent {
 	@Output() pesquisaEnviada = new EventEmitter<string>();
 	@Input() isLoadingSearch = false;
-	@Input() isCarrinho = false;
+	@Input() notHomePage = false;
 	@Input() totalProdutosNoCarrinho!: string;
+	@Input() nomePagina!: string;
 
 	toggleMenu(): void {
 		const menu = document.querySelector('.menu');

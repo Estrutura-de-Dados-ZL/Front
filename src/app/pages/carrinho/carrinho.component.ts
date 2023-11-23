@@ -1,8 +1,11 @@
 import {Component, Inject, type OnInit} from '@angular/core';
+import { FormControl } from '@angular/forms';
 import {type No} from 'src/app/helpers/dataStructures/no';
 import {type Stack} from 'src/app/helpers/dataStructures/stack';
 import {CarrinhoService} from 'src/app/services/carrinho.service';
 import {CheckoutService} from 'src/app/services/checkout.service';
+import { ClienteService } from 'src/app/services/cliente.service';
+import { Cliente } from 'src/types/cliente.interface';
 import {type Produto} from 'src/types/produto.interface';
 
 @Component({
@@ -14,9 +17,12 @@ export class CarrinhoComponent implements OnInit {
 	pilhaProduto!: Stack<Produto>;
 	arrProdutos: Produto[] = [];
 	totalProdutosNoCarrinho = '0';
+	clienteSelecionado = new FormControl<Cliente | undefined>(undefined);
+	clientes: Cliente[] = [];
 	constructor(
 		@Inject(CarrinhoService) private readonly carrinhoService: CarrinhoService,
 		@Inject(CheckoutService) private readonly checkoutService: CheckoutService,
+		@Inject(ClienteService) private readonly clienteService: ClienteService,
 	) {	}
 
 	ngOnInit(): void {
@@ -24,6 +30,15 @@ export class CarrinhoComponent implements OnInit {
 			this.pilhaProduto = carrinho.pilha;
 		});
 		this.pilhaToArrProdutos();
+		this.carregarClientes();
+	}
+	
+	carregarClientes(): void {
+		this.clienteService.getAll().subscribe(clientes => {
+			if (clientes.length > 0) {
+				this.clientes = clientes;
+			}
+		});
 	}
 
 	remover() {
@@ -32,12 +47,15 @@ export class CarrinhoComponent implements OnInit {
 	}
 
 	checkout(): void {
-		this.carrinhoService.carrinho$.subscribe(carrinho => {
-			this.checkoutService.checkout(carrinho.pilha, 2).subscribe(p => {
-				console.log(p);
-				this.voltar();
+		const idCliente = this.clienteSelecionado.value?.id;
+		if(idCliente){
+			this.carrinhoService.carrinho$.subscribe(carrinho => {
+				this.checkoutService.checkout(carrinho.pilha, idCliente).subscribe(p => {
+					console.log(p);
+					this.voltar();
+				});
 			});
-		});
+		}
 	}
 
 	private voltar(): void {
@@ -54,5 +72,6 @@ export class CarrinhoComponent implements OnInit {
 
 		this.arrProdutos = arrProdutos;
 		this.totalProdutosNoCarrinho = this.arrProdutos.length.toString();
+		localStorage.setItem('totalProdutosCarrinho', this.totalProdutosNoCarrinho);
 	}
 }

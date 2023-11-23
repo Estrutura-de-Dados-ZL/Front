@@ -1,0 +1,306 @@
+<app-navbar [notHomePage]="true" nomePagina="Clientes" [totalProdutosNoCarrinho]="totalProdutosNoCarrinho"></app-navbar>
+<section class="max-w-screen-xl mx-auto p-4">
+  <app-tabela [colunas]="colunas" [data]="clientes" (dataAdd)="abrirModalCadastrar($event)" (dataEdit)="abrirModalEditar($event)" (dataDelete)="abrirModalDeletar($event)"></app-tabela>
+</section>
+
+<!-- Modal Edição -->
+<p-dialog *ngIf="clienteSelecionado" header="Editar Cliente" [(visible)]="showModalEditar" [modal]="true" [style]="{ width: '50vw' }" [draggable]="false" [resizable]="false">
+  <!-- Formulário para editar produto -->
+  <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+    <!-- Campos do formulário -->
+    <!-- Descrição -->
+    <div class="mb-6">
+      <label class="block text-gray-700 text-sm font-bold mb-2" for="nome">
+        Nome:
+      </label>
+      <input
+        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+        id="nome"
+        type="text"
+        placeholder="Nome"
+        [(ngModel)]="clienteSelecionado.nome"
+        name="nome"
+      />
+    </div>
+    <!-- CPF -->
+    <div class="mb-6">
+      <label class="block text-gray-700 text-sm font-bold mb-2" for="cpf">
+        CPF:
+      </label>
+      <input
+        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+        id="cpf"
+        type="text"
+        placeholder="CPF"
+        [(ngModel)]="clienteSelecionado.cpf"
+        name="cpf"
+      />
+    </div>
+    <!-- CNPJ -->
+    <div class="mb-6">
+      <label class="block text-gray-700 text-sm font-bold mb-2" for="cnpj">
+        CNPJ:
+      </label>
+      <input
+        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+        id="cnpj"
+        type="text"
+        placeholder="CNPJ"
+        [(ngModel)]="clienteSelecionado.cnpj"
+        name="cnpj"
+      />
+    </div>
+    <!-- Telefone -->
+    <div class="mb-6">
+      <label class="block text-gray-700 text-sm font-bold mb-2" for="telefone">
+        Telefone:
+      </label>
+      <input
+        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+        id="telefone"
+        type="text"
+        placeholder="Telefone"
+        [(ngModel)]="clienteSelecionado.telefone"
+        name="telefone"
+      />
+    </div>
+    <!-- Email -->
+    <div class="mb-6">
+      <label class="block text-gray-700 text-sm font-bold mb-2" for="email">
+        Email:
+      </label>
+      <input
+        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+        id="email"
+        type="text"
+        placeholder="Email"
+        [(ngModel)]="clienteSelecionado.email"
+        name="email"
+      />
+    </div>
+    <!-- Endereço -->
+    <div class="mb-6">
+      <label class="block text-gray-700 text-sm font-bold mb-2" for="rua">
+        Rua:
+      </label>
+      <input
+        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+        id="rua"
+        type="text"
+        placeholder="Rua"
+        [(ngModel)]="clienteSelecionado.rua"
+        name="rua"
+      />
+    </div>
+    <!-- Número -->
+    <div class="mb-6">
+      <label class="block text-gray-700 text-sm font-bold mb-2" for="numero">
+        Número:
+      </label>
+      <input
+        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+        id="numero"
+        type="number"
+        placeholder="Número"
+        [(ngModel)]="clienteSelecionado.numero"
+        name="numero"
+      />
+    </div>
+    <!-- CEP -->
+    <div class="mb-6">
+      <label class="block text-gray-700 text-sm font-bold mb-2" for="cep">
+        CEP:
+      </label>
+      <input
+        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline cep"
+        id="cep"
+        type="text"
+        placeholder="CEP"
+        [(ngModel)]="clienteSelecionado.cep"
+        name="cep"
+      />
+    </div>
+    <!-- COMPLEMENTO -->
+    <div class="mb-6">
+      <label class="block text-gray-700 text-sm font-bold mb-2" for="complemento">
+        Complemento:
+      </label>
+      <input
+        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline complemento"
+        id="complemento"
+        type="text"
+        placeholder="Complemento"
+        [(ngModel)]="clienteSelecionado.complemento"
+        name="complemento"
+      />
+    </div>
+    <!-- Botão de editar -->
+    <div class="flex items-end justify-end">
+      <button
+        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline "
+        type="button"
+        (click)="editaCliente(clienteSelecionado)"
+      >
+        Editar
+      </button>
+    </div>
+  </form>
+</p-dialog>
+
+<!-- Modal Cadastro -->
+<p-dialog header="Cadastrar Cliente" [(visible)]="showModalCadastrar" [modal]="true" [style]="{ width: '50vw' }" [draggable]="false" [resizable]="false">
+  <!-- Formulário para cadastrar produto -->
+  <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+    <div class="mb-6">
+      <label class="block text-gray-700 text-sm font-bold mb-2" for="nome">
+        Nome:
+      </label>
+      <input
+        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+        id="nome"
+        type="text"
+        placeholder="Nome"
+        [(ngModel)]="clienteCadastro.nome"
+        name="nome"
+      />
+    </div>
+    <!-- CPF -->
+    <div class="mb-6">
+      <label class="block text-gray-700 text-sm font-bold mb-2" for="cpf">
+        CPF:
+      </label>
+      <input
+        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+        id="cpf"
+        type="text"
+        placeholder="CPF"
+        [(ngModel)]="clienteCadastro.cpf"
+        name="cpf"
+      />
+    </div>
+    <!-- CNPJ -->
+    <div class="mb-6">
+      <label class="block text-gray-700 text-sm font-bold mb-2" for="cnpj">
+        CNPJ:
+      </label>
+      <input
+        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+        id="cnpj"
+        type="text"
+        placeholder="CNPJ"
+        [(ngModel)]="clienteCadastro.cnpj"
+        name="cnpj"
+      />
+    </div>
+    <!-- Telefone -->
+    <div class="mb-6">
+      <label class="block text-gray-700 text-sm font-bold mb-2" for="telefone">
+        Telefone:
+      </label>
+      <input
+        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+        id="telefone"
+        type="text"
+        placeholder="Telefone"
+        [(ngModel)]="clienteCadastro.telefone"
+        name="telefone"
+      />
+    </div>
+    <!-- Email -->
+    <div class="mb-6">
+      <label class="block text-gray-700 text-sm font-bold mb-2" for="email">
+        Email:
+      </label>
+      <input
+        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+        id="email"
+        type="text"
+        placeholder="Email"
+        [(ngModel)]="clienteCadastro.email"
+        name="email"
+      />
+    </div>
+    <!-- Endereço -->
+    <div class="mb-6">
+      <label class="block text-gray-700 text-sm font-bold mb-2" for="rua">
+        Rua:
+      </label>
+      <input
+        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+        id="rua"
+        type="text"
+        placeholder="Rua"
+        [(ngModel)]="clienteCadastro.rua"
+        name="rua"
+      />
+    </div>
+    <!-- Número -->
+    <div class="mb-6">
+      <label class="block text-gray-700 text-sm font-bold mb-2" for="numero">
+        Número:
+      </label>
+      <input
+        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+        id="numero"
+        type="number"
+        placeholder="Número"
+        [(ngModel)]="clienteCadastro.numero"
+        name="numero"
+      />
+    </div>
+    <!-- CEP -->
+    <div class="mb-6">
+      <label class="block text-gray-700 text-sm font-bold mb-2" for="cep">
+        CEP:
+      </label>
+      <input
+        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline cep"
+        id="cep"
+        type="text"
+        placeholder="CEP"
+        [(ngModel)]="clienteCadastro.cep"
+        name="cep"
+      />
+    </div>
+    <!-- COMPLEMENTO -->
+    <div class="mb-6">
+      <label class="block text-gray-700 text-sm font-bold mb-2" for="complemento">
+        Complemento:
+      </label>
+      <input
+        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline complemento"
+        id="complemento"
+        type="text"
+        placeholder="Complemento"
+        [(ngModel)]="clienteCadastro.complemento"
+        name="complemento"
+      />
+    </div>
+    <!-- Botão de cadastrar -->
+    <div class="flex items-end justify-end">
+      <button
+        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline "
+        type="button"
+        (click)="cadastrarCliente()"
+      >
+        Cadastrar
+      </button>
+    </div>
+  </form>
+</p-dialog>
+
+<!-- Modal Deletar -->
+<p-dialog *ngIf="clienteSelecionado" header="Deletar Produto" [(visible)]="showModalDeletar" [modal]="true" [style]="{ width: '50vw' }" [draggable]="false" [resizable]="false">
+  <div>
+    <p>Tem certeza que deseja deletar o produto {{ clienteSelecionado.nome }}?</p>
+    <div class="flex items-end justify-end">
+      <button
+        class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline "
+        type="button"
+        (click)="deletarCliente(clienteSelecionado)"
+      >
+        Deletar
+      </button>
+    </div>
+  </div>
+</p-dialog>
