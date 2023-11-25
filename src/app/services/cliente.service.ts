@@ -19,8 +19,8 @@ export class ClienteService {
 		return this.http.get<Cliente>(clienteUrl.getById(id));
 	}
 
-	getByNome(nome: string): Observable<Cliente> {
-		return this.http.get<Cliente>(clienteUrl.getByNome(nome));
+	getByNome(nome: string): Observable<Cliente[]> {
+		return this.http.get<Cliente[]>(clienteUrl.getByNome(nome));
 	}
 
 	update(cliente: Cliente): Observable<Cliente> {

@@ -19,6 +19,10 @@ export class ProdutoService {
 		return this.http.get<Produto[]>(produtoUrl.getByNomeTipo(id, nome));
 	}
 
+	getByNome(nome: string): Observable<Produto[]> {
+		return this.http.get<Produto[]>(produtoUrl.getByNome(nome));
+	}
+
 	update(produto: Produto): Observable<Produto> {
 		return this.http.put<Produto>(produtoUrl.update(produto.id), {produto});
 	}
