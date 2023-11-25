@@ -39,6 +39,8 @@ export class ProdutosComponent {
 	tipoProdutos: TipoProduto[] = [];
 	tipoProdutoSelecionado = new FormControl<TipoProduto | undefined>(undefined);
 	totalProdutosNoCarrinho = '0';
+	isLoadingSearch = false;
+	termoPesquisa = '';
 
 	constructor(
 		@Inject(ProdutoService) private readonly produtoService: ProdutoService,
@@ -101,6 +103,32 @@ export class ProdutosComponent {
 		});
 	}
 
+	receberPesquisa(termoPesquisa: string) {
+		this.isLoadingSearch = true;
+		if (termoPesquisa === '') {
+			this.termoPesquisa = 'colevati';
+		} else {
+			this.termoPesquisa = termoPesquisa;
+		}
+
+		this.filtrarProdutos();
+	}
+
+	filtrarProdutos(): void {
+		if (this.termoPesquisa === 'colevati') {
+			this.carregarProdutos();
+			return;
+		}
+
+		this.produtoService.getByNome(this.termoPesquisa).subscribe(clientes => {
+			if (clientes.length > 0) {
+				this.produtos = clientes;
+			}
+
+			this.isLoadingSearch = false;
+		});
+	}
+
 	private setarValorInicialForm(): void {
 		this.tipoProdutoSelecionado.setValue(this.produtoSelecionado.tipoProduto);
 	}
@@ -118,6 +146,8 @@ export class ProdutosComponent {
 			if (produtos.length > 0) {
 				this.produtos = produtos;
 			}
+
+			this.isLoadingSearch = false;
 		});
 	}
 

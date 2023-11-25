@@ -9,10 +9,13 @@ export class TabelaComponent {
 	@Input() colunas: string[] = [];
 	@Input() data: any[] = [];
 	@Input() isHistorico = false;
+	@Input() isLoadingSearch = false;
+	@Output() pesquisaEnviada = new EventEmitter<string>();
 	@Output() dataAdd = new EventEmitter<any>();
 	@Output() dataEdit = new EventEmitter<any>();
 	@Output() dataDelete = new EventEmitter<any>();
 	@Output() dataView = new EventEmitter<any>();
+	@Output() termoPesquisa = new EventEmitter<string>();
 
 	editar(data: any) {
 		this.dataEdit.emit(data);
@@ -28,5 +31,13 @@ export class TabelaComponent {
 
 	visualizar(data: any) {
 		this.dataView.emit(data);
+	}
+
+	pesquisar(termo: string) {
+		this.termoPesquisa.emit(termo);
+	}
+
+	enviarPesquisa(termo: string) {
+		this.pesquisaEnviada.emit(termo);
 	}
 }

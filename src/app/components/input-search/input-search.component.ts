@@ -9,6 +9,7 @@ import {Subject, debounceTime} from 'rxjs';
 export class InputSearchComponent {
 	@Output() pesquisaEnviada = new EventEmitter<string>();
 	@Input() isLoadingSearch = false;
+	@Input() isCrud!: boolean;
 
 	navbarOpen = false;
 	inputPesquisa = '';

@@ -7,12 +7,13 @@ export const produtoUrl = {
 	update: (id: number): string => `${environment.link}/produto/${id}`,
 	save: (tipoProdutoId: number): string => `${environment.link}/produto/${tipoProdutoId}`,
 	delete: (id: number): string => `${environment.link}/produto/${id}`,
+	getByNome: (nome: string): string => `${environment.link}/produto/nome/${nome}`,
 };
 
 export const tipoProdutoUrl = {
 	getAll: (): string => `${environment.link}/tipoProduto`,
 	getById: (id: number): string => `${environment.link}/tipoProduto/${id}`,
-	getByDescricao: (descricao: string): string => `${environment.link}/tipoProduto/${descricao}`,
+	getByDescricao: (descricao: string): string => `${environment.link}/tipoProduto/descricao/${descricao}`,
 	update: (id: number): string => `${environment.link}/tipoProduto/${id}`,
 	save: (): string => `${environment.link}/tipoProduto`,
 	delete: (id: number): string => `${environment.link}/tipoProduto/${id}`,
@@ -21,7 +22,7 @@ export const tipoProdutoUrl = {
 export const clienteUrl = {
 	getAll: (): string => `${environment.link}/cliente`,
 	getById: (id: number): string => `${environment.link}/cliente/${id}`,
-	getByNome: (nome: string): string => `${environment.link}/cliente/${nome}`,
+	getByNome: (nome: string): string => `${environment.link}/cliente/nome/${nome}`,
 	update: (id: number): string => `${environment.link}/cliente/${id}`,
 	save: (): string => `${environment.link}/cliente`,
 	delete: (id: number): string => `${environment.link}/cliente/${id}`,

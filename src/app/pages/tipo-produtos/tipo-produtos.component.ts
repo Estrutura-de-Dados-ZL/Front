@@ -26,6 +26,8 @@ export class TipoProdutosComponent {
 	showModalDeletar = false;
 	showModalCadastrar = false;
 	totalProdutosNoCarrinho = '0';
+	isLoadingSearch = false;
+	termoPesquisa = '';
 
 	constructor(@Inject(TipoProdutoService) private readonly tipoProdutoService: TipoProdutoService) {}
 
@@ -75,6 +77,32 @@ export class TipoProdutosComponent {
 	deletarTipoProduto(tipoProduto: TipoProduto): void {
 		this.tipoProdutoService.delete(tipoProduto.id).subscribe(() => {
 			this.carregarTipoProdutos();
+		});
+	}
+
+	receberPesquisa(termoPesquisa: string) {
+		this.isLoadingSearch = true;
+		if (termoPesquisa === '') {
+			this.termoPesquisa = 'colevati';
+		} else {
+			this.termoPesquisa = termoPesquisa;
+		}
+
+		this.filtrarTipoProdutos();
+	}
+
+	filtrarTipoProdutos(): void {
+		if (this.termoPesquisa === 'colevati') {
+			this.carregarTipoProdutos();
+			return;
+		}
+
+		this.tipoProdutoService.getByDescricao(this.termoPesquisa).subscribe(tipoProdutos => {
+			if (tipoProdutos.length > 0) {
+				this.tipoProdutos = tipoProdutos;
+			}
+
+			this.isLoadingSearch = false;
 		});
 	}
 

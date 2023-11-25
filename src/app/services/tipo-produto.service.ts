@@ -19,8 +19,8 @@ export class TipoProdutoService {
 		return this.http.get<TipoProduto>(tipoProdutoUrl.getById(id));
 	}
 
-	getByDescricao(descricao: string): Observable<TipoProduto> {
-		return this.http.get<TipoProduto>(tipoProdutoUrl.getByDescricao(descricao));
+	getByDescricao(descricao: string): Observable<TipoProduto[]> {
+		return this.http.get<TipoProduto[]>(tipoProdutoUrl.getByDescricao(descricao));
 	}
 
 	update(tipoProduto: TipoProduto): Observable<TipoProduto> {

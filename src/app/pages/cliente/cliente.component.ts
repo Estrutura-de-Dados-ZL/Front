@@ -34,6 +34,9 @@ export class ClienteComponent {
 	showModalDeletar = false;
 	showModalCadastrar = false;
 	totalProdutosNoCarrinho = '0';
+	radioBtnEscolhido = '';
+	isLoadingSearch = false;
+	termoPesquisa = '';
 
 	constructor(@Inject(ClienteService) private readonly clienteService: ClienteService) {}
 
@@ -81,11 +84,48 @@ export class ClienteComponent {
 		this.showModalDeletar = false;
 	}
 
+	setRadioBtnEscolhido(radioBtnEscolhido: string): void {
+		this.radioBtnEscolhido = radioBtnEscolhido;
+		if (radioBtnEscolhido === 'PF') {
+			this.clienteCadastro.cnpj = '';
+		} else {
+			this.clienteCadastro.cpf = '';
+		}
+	}
+
+	receberPesquisa(termoPesquisa: string) {
+		this.isLoadingSearch = true;
+		if (termoPesquisa === '') {
+			this.termoPesquisa = 'colevati';
+		} else {
+			this.termoPesquisa = termoPesquisa;
+		}
+
+		this.filtrarClientes();
+	}
+
+	filtrarClientes(): void {
+		if (this.termoPesquisa === 'colevati') {
+			this.carregarClientes();
+			return;
+		}
+
+		this.clienteService.getByNome(this.termoPesquisa).subscribe(clientes => {
+			if (clientes.length > 0) {
+				this.clientes = clientes;
+			}
+
+			this.isLoadingSearch = false;
+		});
+	}
+
 	private carregarClientes(): void {
 		this.clienteService.getAll().subscribe(clientes => {
 			if (clientes.length > 0) {
 				this.clientes = clientes;
 			}
+
+			this.isLoadingSearch = false;
 		});
 	}
 }
