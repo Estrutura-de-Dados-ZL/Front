@@ -49,7 +49,7 @@ export class ProdutosComponent {
 		this.carregarProdutos();
 		this.carregarTipoProdutos();
 		const totalProdutosNoCarrinho = localStorage.getItem('totalProdutosCarrinho');
-		if (totalProdutosNoCarrinho){
+		if (totalProdutosNoCarrinho) {
 			this.totalProdutosNoCarrinho = totalProdutosNoCarrinho;
 		}
 	}

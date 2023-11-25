@@ -2,18 +2,19 @@
 <header class="bg-gray-800">
   <nav class="hidden md:flex items-center justify-between p-4 text-white max-w-screen-xl mx-auto">
     <div class="flex items-center justify-between w-full">
-      <div class="h-10 mr-2 pt-1 w-1/12 text-center">
-        <span class="whitespace-nowrap text-3xl font-bold font-serif">E-COMMERCE</span>
+      <div class="h-10 mr-2 pt-1 w-2/12 text-center">
+        <span class="whitespace-nowrap text-3xl font-bold font-serif">BACKOFFICE</span>
       </div>
       <div class="h-10 mr-2 pt-1 w-1/12" *ngIf="notHomePage">
         <span class="whitespace-nowrap text-2xl font-bold font-serif">{{ nomePagina }}</span>
       </div>
       <app-input-search *ngIf="!notHomePage" (pesquisaEnviada)="enviarPesquisa($event)" [isLoadingSearch]="isLoadingSearch"></app-input-search>
-      <div class="ml-4 flex justify-between w-2/12">
+      <div class="ml-4 flex justify-between w-3/12">
         <i class="pi pi-home cursor-pointer text-xl" routerLink="" title="Home"></i>
         <i class="pi pi-user cursor-pointer text-xl" routerLink="/clientes" title="Clientes"></i>
         <i class="pi pi-book cursor-pointer text-xl" routerLink="/produtos" title="Produtos"></i>
         <i class="pi pi-th-large cursor-pointer text-xl" routerLink="/tipoProdutos" title="Tipo de Produtos"></i>
+        <i class="pi pi-list cursor-pointer text-xl" routerLink="/historicoCompras" title="Compras"></i>
         <i class="pi pi-shopping-cart cursor-pointer text-xl" routerLink="/carrinho" title="Carrinho" pBadge [value]="totalProdutosNoCarrinho" severity="warning"></i>
       </div>
     </div>

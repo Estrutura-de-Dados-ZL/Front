@@ -32,7 +32,7 @@ export class TipoProdutosComponent {
 	ngOnInit(): void {
 		this.carregarTipoProdutos();
 		const totalProdutosNoCarrinho = localStorage.getItem('totalProdutosCarrinho');
-		if (totalProdutosNoCarrinho){
+		if (totalProdutosNoCarrinho) {
 			this.totalProdutosNoCarrinho = totalProdutosNoCarrinho;
 		}
 	}

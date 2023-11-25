@@ -1,11 +1,11 @@
 import {Component, Inject, type OnInit} from '@angular/core';
-import { FormControl } from '@angular/forms';
+import {FormControl} from '@angular/forms';
 import {type No} from 'src/app/helpers/dataStructures/no';
 import {type Stack} from 'src/app/helpers/dataStructures/stack';
 import {CarrinhoService} from 'src/app/services/carrinho.service';
 import {CheckoutService} from 'src/app/services/checkout.service';
-import { ClienteService } from 'src/app/services/cliente.service';
-import { Cliente } from 'src/types/cliente.interface';
+import {ClienteService} from 'src/app/services/cliente.service';
+import {type Cliente} from 'src/types/cliente.interface';
 import {type Produto} from 'src/types/produto.interface';
 
 @Component({
@@ -32,7 +32,7 @@ export class CarrinhoComponent implements OnInit {
 		this.pilhaToArrProdutos();
 		this.carregarClientes();
 	}
-	
+
 	carregarClientes(): void {
 		this.clienteService.getAll().subscribe(clientes => {
 			if (clientes.length > 0) {
@@ -48,7 +48,7 @@ export class CarrinhoComponent implements OnInit {
 
 	checkout(): void {
 		const idCliente = this.clienteSelecionado.value?.id;
-		if(idCliente){
+		if (idCliente) {
 			this.carrinhoService.carrinho$.subscribe(carrinho => {
 				this.checkoutService.checkout(carrinho.pilha, idCliente).subscribe(p => {
 					console.log(p);

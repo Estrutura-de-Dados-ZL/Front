@@ -1,6 +1,6 @@
 <div class="p-6">
   <!-- Barra de pesquisa -->
-  <div class="flex justify-between items-center mb-4">
+  <div class="flex justify-between items-center mb-4" *ngIf="!isHistorico">
     <input type="text" pInputText placeholder="Pesquisar..." class="p-2 mr-2">
     <button type="button" label="Adicionar Novo" class="rounded-md bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4"
     (click)="adicionar()">
@@ -23,7 +23,7 @@
         <td *ngFor="let coluna of colunas">
           {{ rowData[coluna] }}
         </td>
-        <td>
+        <td *ngIf="!isHistorico">
           <button type="button" (click)="editar(rowData)">
             <i class="pi pi-pencil text-xl cursor-pointer text-blue-500 hover:text-blue-700 mr-3"></i>
           </button>
@@ -31,6 +31,10 @@
             <i class="pi pi-trash text-xl cursor-pointer text-red-500 hover:text-red-700"></i>
           </button>
         </td>
+        <td *ngIf="isHistorico">
+          <button type="button" (click)="visualizar(rowData)">
+            <i class="pi pi-eye text-xl cursor-pointer text-blue-500 hover:text-blue-700 mr-3"></i>
+          </button>
       </tr>
     </ng-template>
   </p-table>

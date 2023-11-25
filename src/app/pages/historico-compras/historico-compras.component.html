@@ -1,0 +1,68 @@
+<app-navbar [notHomePage]="true" nomePagina="Histórico de Compras" [totalProdutosNoCarrinho]="totalProdutosNoCarrinho"></app-navbar>
+<section class="max-w-screen-xl mx-auto p-4" *ngIf="checkoutFilter.length">
+  <app-tabela [colunas]="colunas" [data]="checkoutFilter" [isHistorico]="true" (dataView)="abrirModal($event)"></app-tabela>
+</section>
+<section class="max-w-screen-xl mx-auto p-4" *ngIf="!checkoutFilter.length">
+  <div class="w-full text-center">
+    <h1 class="text-2xl font-bold">Nenhuma compra encontrada!</h1>
+  </div>
+</section>
+<!-- Modal Detalhes compra -->
+<p-dialog header="Detalhes da compra" [(visible)]="displayModal" [modal]="true" [responsive]="true" [style]="{width: '50vw'}">
+  <div class="p-grid">
+    <div class="p-col-12 mb-4">
+      <div class="p-grid">
+        <div class="p-col-12 p-md-6">
+          <div class="p-grid">
+            <div class="p-col-12">
+              <p>Nome: {{ checkoutSelecionado?.cliente?.nome }}</p>
+            </div>
+            <div class="p-col-12" *ngIf="checkoutSelecionado?.cliente?.cpf">
+              <p>CPF: {{ checkoutSelecionado?.cliente?.cpf }}</p>
+            </div>
+            <div class="p-col-12" *ngIf="checkoutSelecionado?.cliente?.cpf">
+              <p>CNPJ: {{ checkoutSelecionado?.cliente?.cnpj }}</p>
+            </div>
+            <div class="p-col-12">
+              <p>Email: {{ checkoutSelecionado?.cliente?.email }}</p>
+            </div>
+            <div class="p-col-12">
+              <p>Telefone: {{ checkoutSelecionado?.cliente?.telefone }}</p>
+            </div>
+            <div class="p-col-12 flex">
+              <p>Endereço: {{ checkoutSelecionado?.cliente?.rua }}</p><span>, {{ checkoutSelecionado?.cliente?.numero }}</span>
+            </div>
+            <div class="p-col-12">
+              <p>Complemento: {{ checkoutSelecionado?.cliente?.complemento }}</p>
+            </div>
+            <div class="p-col-12">
+              <p>Valor Total: {{ checkoutSelecionado?.valorTotal | currency:'BRL' }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <p-table *ngIf="checkoutSelecionado" [value]="checkoutSelecionado.lista" class="w-full">
+      <ng-template pTemplate="header">
+        <tr>
+          <th>Produto</th>
+          <th>Quantidade</th>
+          <th>Valor</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-rowData>
+        <tr>
+          <td>
+            {{ rowData.nome }}
+          </td>
+          <td>
+            {{ rowData.quantidade }}
+          </td>
+          <td>
+            {{ rowData.valor | currency:'BRL' }}
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+</p-dialog>
