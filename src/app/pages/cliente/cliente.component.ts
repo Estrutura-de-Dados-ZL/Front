@@ -40,7 +40,7 @@ export class ClienteComponent {
 	ngOnInit(): void {
 		this.carregarClientes();
 		const totalProdutosNoCarrinho = localStorage.getItem('totalProdutosCarrinho');
-		if (totalProdutosNoCarrinho){
+		if (totalProdutosNoCarrinho) {
 			this.totalProdutosNoCarrinho = totalProdutosNoCarrinho;
 		}
 	}

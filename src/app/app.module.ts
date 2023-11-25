@@ -23,8 +23,8 @@ import {CarrinhoComponent} from './pages/carrinho/carrinho.component';
 import {TabelaComponent} from './components/table/tabela/tabela.component';
 import {ProdutosComponent} from './pages/produtos/produtos.component';
 import {TipoProdutosComponent} from './pages/tipo-produtos/tipo-produtos.component';
-import {CommonModule} from '@angular/common';
-import { ClienteComponent } from './pages/cliente/cliente.component';
+import {ClienteComponent} from './pages/cliente/cliente.component';
+import {HistoricoComprasComponent} from './pages/historico-compras/historico-compras.component';
 
 @NgModule({
 	declarations: [
@@ -38,7 +38,8 @@ import { ClienteComponent } from './pages/cliente/cliente.component';
 		TabelaComponent,
 		ProdutosComponent,
 		TipoProdutosComponent,
-  ClienteComponent,
+		ClienteComponent,
+		HistoricoComprasComponent,
 	],
 	imports: [
 		FormsModule,
